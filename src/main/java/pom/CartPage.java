@@ -14,6 +14,7 @@ public class CartPage {
 
 	@FindBy (xpath = "//ul[@id='cartData']") private List<WebElement> products;
 	@FindBy (xpath = "(//a[@onclick='cart.submitOrder()'])[1]") private WebElement proceedToCheckout;
+	@FindBy (xpath = "(//a[@onclick='cart.continueShopping()'])[1]")private WebElement continueShopping;
 	
 	public CartPage(WebDriver driver) {
 		PageFactory.initElements(driver, this);
@@ -23,6 +24,12 @@ public class CartPage {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(5000));
 		wait.until(ExpectedConditions.visibilityOf(proceedToCheckout));
 		return products.size();
+	}
+	
+	public void clickOnContinueShopping(WebDriver driver) {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(5000));
+		wait.until(ExpectedConditions.visibilityOf(continueShopping));
+		continueShopping.click();
 	}
 	
 	

@@ -8,10 +8,12 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class ProductResultPage {
+public class ProductResultPage extends BasePage{
 
 	@FindBy (xpath = "//div[@class='grid_Square ']")private List<WebElement> products;
 	@FindBy (xpath = "//a[@class='bt_compare icon chat quickFancyBox']")private List<WebElement> quickView;
+	@FindBy (xpath = "//div[@class='item_title']")private List<WebElement> productTitle;
+	
 	
 	public ProductResultPage(WebDriver driver) {
 		PageFactory.initElements(driver, this);
@@ -26,6 +28,14 @@ public class ProductResultPage {
 		actions.moveToElement(products.get(product));
 		actions.perform();
 		quickView.get(product).click();
+	}
+	
+	public void clickOnProduct(int product) {
+		products.get(product).click();
+	}
+	
+	public String getProductTitle(int product) {
+		return productTitle.get(product).getText();
 	}
 	
 	
