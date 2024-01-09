@@ -4,6 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import pojo.LaunchBrowser;
@@ -13,9 +14,10 @@ import pom.NaptoolHomePage;
 
 public class VerifyShoppingCategoriesTest extends BaseTest {
 
+	@Parameters ({"browser"})
 	@BeforeMethod
-	public void openApplication() {
-		driver = LaunchBrowser.chrome();
+	public void openApplication(String browser) {
+		driver = LaunchBrowser.browser(browser);
 	}
 	
 	@Test

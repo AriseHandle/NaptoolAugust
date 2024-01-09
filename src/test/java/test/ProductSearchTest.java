@@ -1,7 +1,9 @@
 package test;
 
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import pojo.LaunchBrowser;
@@ -10,9 +12,10 @@ import pom.ProductResultPage;
 
 public class ProductSearchTest extends BaseTest{
 
+	@Parameters ({"browser"})
 	@BeforeMethod
-	public void openApplication() {
-		driver = LaunchBrowser.chrome();
+	public void openApplication(String browser) {
+		driver = LaunchBrowser.browser(browser);
 	}
 	
 	@Test
@@ -37,4 +40,8 @@ public class ProductSearchTest extends BaseTest{
 		
 	}
 	
+	@AfterMethod
+	public void close() {
+		driver.close();
+	}
 }

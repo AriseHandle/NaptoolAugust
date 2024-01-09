@@ -3,7 +3,9 @@ package test;
 import static org.testng.Assert.assertEquals;
 
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import pojo.LaunchBrowser;
@@ -20,9 +22,10 @@ public class AddToCartTest extends BaseTest {
 	ProductResultPage productResultPage;
 	ProductDescriptionPage productDescriptionPage;
 	
+	@Parameters ({"browser"})
 	@BeforeMethod
-	public void openApplication() {
-		driver = LaunchBrowser.chrome();
+	public void openApplication(String browser) {
+		driver = LaunchBrowser.browser(browser);
 	}
 	
 	@Test
@@ -80,8 +83,11 @@ public class AddToCartTest extends BaseTest {
 		productResultPage.switchToPage(driver, productTitle);
 		
 		productDescriptionPage= new ProductDescriptionPage(driver);
-		productDescriptionPage.clickOnBuy();
-		
-		
+		productDescriptionPage.clickOnBuy();	
+	}
+	
+	@AfterMethod
+	public void close() {
+		driver.close();
 	}
 }
