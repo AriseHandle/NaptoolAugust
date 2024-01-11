@@ -5,8 +5,9 @@
     <classes>
       <class name="test.AddToCartTest">
         <methods>
+          <include name="close"/>
           <include name="openApplication"/>
-          <include name="verifyIfUserIsAbleToAddMultipleProductToCart"/>
+          <include name="VerifyIfProductDetailsOnShoppingCartAreSimilarToProductAddedFromQuickViewTab"/>
         </methods>
       </class> <!-- test.AddToCartTest -->
     </classes>

@@ -19,18 +19,18 @@ public class ProductQuickViewPage {
 		return productName.getText();
 	}
 	
-	public String getProductPrice(){
-		return price.getText();
+	public double getProductPrice(){
+		return Double.parseDouble(price.getText());
 	}
 	
 	public void clickOnClickHereToBuy(){
 		clickHereToBuy.click();
 	}
 	
-	public String getShippingCharges(){
+	public double getShippingCharges(){
 		String charges = shippingCharges.getText();
 		String [] charge =charges.split(" ");
-		return charge[1];
+		return   Double.parseDouble(charge[1]);
 		
 	}
 	

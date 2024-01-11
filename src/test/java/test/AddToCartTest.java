@@ -22,10 +22,10 @@ public class AddToCartTest extends BaseTest {
 	ProductResultPage productResultPage;
 	ProductDescriptionPage productDescriptionPage;
 	
-	@Parameters ({"browser"})
+	//@Parameters ({"browser"})
 	@BeforeMethod
-	public void openApplication(String browser) {
-		driver = LaunchBrowser.browser(browser);
+	public void openApplication() {
+		driver = LaunchBrowser.browser("Chrome");
 	}
 	
 	@Test
@@ -86,8 +86,34 @@ public class AddToCartTest extends BaseTest {
 		productDescriptionPage.clickOnBuy();	
 	}
 	
+	@Test
+	public void VerifyIfProductDetailsOnShoppingCartAreSimilarToProductAddedFromQuickViewTab() {
+		NaptoolHomePage naptoolHomePage = new NaptoolHomePage(driver);
+		naptoolHomePage.enterInSearchTab("Mobiles");
+		naptoolHomePage.clickOnSearch();
+		
+		productResultPage =new ProductResultPage(driver);
+		productResultPage.clickOnQuickView(driver, 0);
+		
+		productQuickViewPage =new ProductQuickViewPage(driver);
+		String expectedProductName=productQuickViewPage.getProductName();
+		double expectedPrice =productQuickViewPage.getProductPrice();
+		double expectedShipping =productQuickViewPage.getShippingCharges();
+		productQuickViewPage.clickOnClickHereToBuy();
+		
+		cartPage = new CartPage(driver);
+		Assert.assertEquals(cartPage.getProductName(0, driver),expectedProductName);
+		Assert.assertEquals(cartPage.getUnitPrice(1), expectedPrice);
+		Assert.assertEquals(cartPage.getShippingPrice(1),expectedShipping);
+		
+		
+		
+
+	}
+
+	
 	@AfterMethod
 	public void close() {
-		driver.close();
+		//driver.close();
 	}
 }
